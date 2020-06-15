@@ -18,7 +18,9 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-
+    /**
+     *注册
+     */
     @PostMapping("/register")
     @ResponseBody
     public String registerUser(@RequestParam String username,@RequestParam String password,@RequestParam String avatar)  throws Exception{
@@ -39,6 +41,9 @@ public class UserController {
 
     }
 
+    /**
+     *登录
+     */
     @PostMapping("/login")
     public User loginUser(String username,String password) throws Exception{
         User user=userService.login(username,password);
@@ -49,13 +54,11 @@ public class UserController {
         }
     }
 
+    /**
+     *更新用户信息
+     */
     @PostMapping("/update")
     public String updateUserInfo(int id,String school,String college,String sex,String introduce) throws Exception{
-        System.out.println(id);
-        System.out.println(sex);
-        System.out.println(introduce);
-
-
         String str = "";
         if (userService.findById(id) != null) {
             int num1 = userService.updateUserInfo(id,school,college,sex, introduce);
@@ -72,6 +75,9 @@ public class UserController {
         return str;
     }
 
+    /**
+     *获取用户头像
+     */
     @PostMapping("/avatar")
     public String updateAvatar(String avatar,int id) throws Exception {
         int num=userService.updateUserAvatar(avatar,id);
@@ -82,6 +88,9 @@ public class UserController {
         }
     }
 
+    /**
+     *修改密码
+     */
     @PostMapping("password")
     public String updatePassword(String password ,int id) throws Exception{
         int num =userService.updatePassword(password, id);
@@ -92,6 +101,9 @@ public class UserController {
         }
     }
 
+    /**
+     *根据用户名获取用户信息
+     */
     @PostMapping("info")
     public ArrayList getUserInfo(String username) {
          User user=userService.getUserInfo(username);
@@ -103,6 +115,9 @@ public class UserController {
         return info;
     }
 
+    /**
+     *根据用户id获取用户信息
+     */
     @PostMapping("infoid")
     public ArrayList getUserInfoById(int uid) {
         User user=userService.getUserInfoById(uid);
@@ -113,23 +128,38 @@ public class UserController {
         return info;
     }
 
+    /**
+     *获取前三名热度最高用户
+     */
     @GetMapping("three")
     public ArrayList getTopThree(){
         return userService.getTopThree();
     }
 
+    /**
+     *获取活跃用户
+     */
     @GetMapping("activeuser")
     public ArrayList getActiveUser(){
         return userService.getActiveUser();
     }
 
 
-    /*管理系统*/
+    /**
+    *管理系统
+    */
+
+    /**
+     *获取所有用户
+     */
     @GetMapping("allusers")
     public List getAllUsers(){
         return userService.getAllUsers();
     }
 
+    /**
+     *删除用户
+     */
     @PostMapping("deleteuser")
     @ResponseBody
     public String deleteUser(@RequestParam int uid,@RequestParam String username) throws Exception{
@@ -146,6 +176,9 @@ public class UserController {
         return userService.getUserInfoByAdmin(id);
     }
 
+    /**
+     *更新用户信息
+     */
     @PostMapping("adminupdateuser")
     public void adminUpdateUser(int id,String password,String avatar,String sex,String school,String edu,String introduce){
          userService.adminUpdateUser(id,password,avatar,sex,school,edu,introduce);

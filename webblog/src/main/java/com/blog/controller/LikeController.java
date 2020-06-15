@@ -15,18 +15,27 @@ public class LikeController {
     @Autowired
     private LikeService likeService;
 
+    /**
+     *获取文章的点赞用户
+     */
     @PostMapping("userlist")
     @ResponseBody
     public List<User> getUserList(@RequestParam int aid){
         return likeService.getLikeUser(aid);
     }
 
+    /**
+     *取消点赞
+     */
     @PostMapping("delete")
     @ResponseBody
     public int deleteLike(@RequestParam int aid,@RequestParam int uid){
         return likeService.deleteLike(aid,uid);
     }
 
+    /**
+     *点赞
+     */
     @PostMapping("add")
     @ResponseBody
     public int addLike(@RequestParam int aid,@RequestParam int uid){

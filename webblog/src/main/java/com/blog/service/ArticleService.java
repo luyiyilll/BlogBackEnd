@@ -1,22 +1,15 @@
 package com.blog.service;
 
 import com.blog.domin.Article;
-import com.blog.domin.Comment;
-import com.blog.domin.Statistics;
 import com.blog.domin.User;
 import com.blog.reposity.ArticleRepository;
 import com.blog.reposity.CommentRepository;
 import com.blog.reposity.StatisticsRepository;
 import com.blog.reposity.UserReposity;
-import org.omg.CORBA.PUBLIC_MEMBER;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class ArticleService {
@@ -100,6 +93,27 @@ public class ArticleService {
     }
 
 
+//    public ArrayList timeLineArticle(){
+//        List<Article> articles=articleRepository.findAll();
+//        ArrayList all= new ArrayList();
+//        ListIterator listIterator=articles.listIterator();
+//        ArrayList o = new ArrayList();
+//        while (listIterator.hasNext()) {
+//            Article a = (Article) listIterator.next();
+//            String date=a.getPost_date().substring(0,4);
+//            o.add(date);
+//        }
+//        ArrayList dateList  = new ArrayList<String>(new HashSet<String>(o));
+//        ArrayList allList=new ArrayList();
+//        ArrayList list=new ArrayList();
+//        while (listIterator.hasNext()){
+//            Article a = (Article) listIterator.next();
+//            if(dateList.contains(a.getPost_date().substring(0,4))){
+//
+//                list.add(a.getPost_date().substring(0,4));
+//            }
+//        }
+//    }
 
     /*管理系统*/
 

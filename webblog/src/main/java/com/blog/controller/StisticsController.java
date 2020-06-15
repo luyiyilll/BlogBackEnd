@@ -13,11 +13,15 @@ public class StisticsController {
     @Autowired
     private StatisticsService statisticsService;
 
+    
     @PostMapping("likeuser")
     public List<Statistics> getLikesUser(@RequestParam int aid){
         return statisticsService.getLikeUser(aid);
     }
 
+    /**
+     *修改文章统计里的点赞数
+     */
     @PostMapping("updatecnum")
     @ResponseBody
     public String updateClickNum(int aid) throws Exception{

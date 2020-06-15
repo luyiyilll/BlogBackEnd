@@ -4,7 +4,6 @@ import com.blog.domin.Article;
 import com.blog.domin.Statistics;
 import com.blog.domin.User;
 import com.blog.reposity.ArticleRepository;
-import com.blog.reposity.StatisticsRepository;
 import com.blog.reposity.UserReposity;
 import com.blog.service.ArticleService;
 import com.blog.service.StatisticsService;
@@ -28,6 +27,9 @@ public class ArticleController {
     @Autowired
     private StatisticsService statisticsService;
 
+    /**
+     * 用户发表文章
+     */
     @PostMapping("/post")
     @ResponseBody
     public String postArticle(@RequestParam String title, @RequestParam String content,@RequestParam String atype, @RequestParam int uid) throws Exception{
@@ -41,16 +43,25 @@ public class ArticleController {
         }
     }
 
+    /**
+     * 获得用户刚发表的文章
+     */
     @GetMapping("postcontent")
     public Article getPostContent(int uid){
-       return articleService.getPostContent(uid);
+        return articleService.getPostContent(uid);
     }
 
+    /**
+     * 根据文章id获取文章
+     */
     @GetMapping("content")
-        public Optional<Article> findBiId(Integer aid){
+    public Optional<Article> findBiId(Integer aid){
         return articleRepository.findById(aid);
     }
 
+    /**
+     * 用户编辑文章
+     */
     @PostMapping("edit")
     @ResponseBody
     public String editArticle(@RequestParam String title,@RequestParam String content,@RequestParam String atype, @RequestParam int aid){
@@ -61,6 +72,9 @@ public class ArticleController {
         }
     }
 
+    /**
+     * 用户删除文章
+     */
     @PostMapping("delete")
     @ResponseBody
     public String deleteArticle(@RequestParam int aid){
@@ -71,18 +85,27 @@ public class ArticleController {
         }
     }
 
+    /**
+     * 获取全部文章
+     */
     @GetMapping("all")
     public List<Article> getALL(){
         return articleRepository.findAll();
     }
 
 
+    /**
+     * 获取某个用户发表的文章
+     */
     @PostMapping("useralist")
     public List<Article> getUserAList(String username){
         return articleService.getUserAList(username);
     }
 
 
+    /**
+     * 根据文章类型分类并返回
+     */
     @GetMapping("sort")
     public ArrayList<Article> getSortAList(int type) throws Exception{
         List<Article> articles=articleService.getSortAList(type);
@@ -113,23 +136,26 @@ public class ArticleController {
 
     }
 
+    /**
+     *搜索文章
+     */
     @PostMapping("search")
     public ArrayList getSearchContent(@RequestParam String keyword){
-       return articleService.getSearchContent(keyword);
+        return articleService.getSearchContent(keyword);
     }
 
+    /**
+     * 得到分类文章
+     */
     @PostMapping("typearticle")
     public ArrayList getTypeArticle(@RequestParam String type){
         return articleService.getTypeArticle(type);
     }
 
-//    @GetMapping("allarticlesinfo")
-//    public ArrayList allArticle(){
-//        return articleService.getAllArticle();
-//    }
 
-
-
+    /**
+     * 获取所有文章以及其用户信息
+     */
     @GetMapping("allarticlesinfo")
     public ArrayList<Article> allArticle() throws Exception{
         List<Article> articles=articleRepository.findAll();
@@ -166,4 +192,13 @@ public class ArticleController {
         }
 
     }
+
+    /**
+     * 根据时间分类返回文章
+     */
+//    public ArrayList timeLineArticle(){
+//        return articleService.timeLineArticle();
+//    }
+
+
 }

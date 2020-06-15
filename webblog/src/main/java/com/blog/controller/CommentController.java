@@ -18,13 +18,18 @@ public class CommentController {
     @Autowired
     private CommentRepository commentRepository;
 
-
+    /**
+     * 获取文章评论
+     */
     @PostMapping("articlecomment")
     @ResponseBody
     public List<Comment> findArticleComment(@RequestParam int aid){
         return commentService.findArticleComment(aid);
     }
 
+    /**
+     *发表评论
+     */
     @PostMapping("insert")
     @ResponseBody
     public String insertComment(@RequestParam int aid,@RequestParam String content,@RequestParam String username,@RequestParam String avatar) throws Exception{
@@ -35,6 +40,9 @@ public class CommentController {
         }
     }
 
+    /**
+     *编辑评论
+     */
     @PostMapping("update")
     @ResponseBody
     public String updateComment(@RequestParam int cid,@RequestParam String content) throws Exception{
@@ -45,6 +53,9 @@ public class CommentController {
         }
     }
 
+    /**
+     *删除评论
+     */
     @PostMapping("delete")
     @ResponseBody
     public String deleteComment(@RequestParam int cid) throws Exception{
