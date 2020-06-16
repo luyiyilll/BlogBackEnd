@@ -51,6 +51,9 @@ public interface UserReposity extends JpaRepository<User,Integer> {
     @Query(value = "select * from tb_user where id=?1",nativeQuery = true)
     public User getUserInfoById(int uid);
 
+    @Query(value = "select visited_user_id from tb_recently_visited where user_id=?1",nativeQuery = true)
+    public List<Integer> getRecentVisitId(int id);
+
 
     /*管理系统*/
     @Query(value = "select * from tb_user ",nativeQuery = true)

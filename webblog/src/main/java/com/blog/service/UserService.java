@@ -132,6 +132,26 @@ public class UserService {
         return userList;
     }
 
+
+    public ArrayList getRecentVisit(int id){
+       List<Integer> ids=userReposity.getRecentVisitId(id);
+       ArrayList userList= new ArrayList();
+       ListIterator listIterator=ids.listIterator();
+        while (listIterator.hasNext()){
+            ArrayList info= new ArrayList();
+            int uid= (int)listIterator.next();
+            User user=userReposity.getUserInfoById(uid);
+            info.add(user.getId());
+            info.add(user.getUsername());
+            info.add(user.getAvatar());
+            info.add(user.getIntroduce());
+            userList.add(info);
+        }
+        return userList;
+    }
+
+
+
     /*管理系统*/
     public List getAllUsers(){
         return userReposity.getAllUsers();

@@ -21,7 +21,7 @@ public interface ArticleRepository extends JpaRepository<Article,Integer> {
     @Query(value = "select * from tb_article where user_id=?1 order by post_date desc limit 1",nativeQuery = true)
     public Article getPostContent(int uid);
 
-    @Query(value =  "select * from tb_article where user_id = ?1",nativeQuery = true)
+    @Query(value =  "select * from tb_article where user_id = ?1 order by post_date desc ",nativeQuery = true)
     public List<Article> getUserAList(int uid);
 
     @Query(value = "select * from tb_article where id = ?1",nativeQuery = true)

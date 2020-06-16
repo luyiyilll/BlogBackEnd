@@ -183,4 +183,12 @@ public class UserController {
     public void adminUpdateUser(int id,String password,String avatar,String sex,String school,String edu,String introduce){
          userService.adminUpdateUser(id,password,avatar,sex,school,edu,introduce);
     }
+
+    /**
+     *获取该用户最近访客
+     */
+    @PostMapping("getrecentvisit")
+    public ArrayList getRecentVisit(@RequestParam int id){
+        return userService.getRecentVisit(id);
+    }
 }
