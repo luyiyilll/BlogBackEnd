@@ -150,6 +150,12 @@ public class UserService {
         return userList;
     }
 
+    public int addVisitedUser(int touserid,int userid){
+        if(userReposity.selectVisitedUser(touserid,userid)!=0)
+            return 0;
+        else
+            return userReposity.addVisitedUser(touserid,userid);
+    }
 
 
     /*管理系统*/

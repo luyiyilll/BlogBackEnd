@@ -50,4 +50,10 @@ public interface ArticleRepository extends JpaRepository<Article,Integer> {
 
     @Query(value = "select id from tb_article where user_id=?1")
     public List<Integer> findUserAid(int uid);
+
+    @Query(value = "SELECT a.atype from tb_article a GROUP BY a.atype",nativeQuery = true)
+    public List<String> getAllType();
+
+    @Query(value = "select * from tb_article where atype =?1",nativeQuery = true)
+    public List<Article> getTypeArticles(String type);
 }

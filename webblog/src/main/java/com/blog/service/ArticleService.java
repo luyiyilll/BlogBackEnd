@@ -93,6 +93,11 @@ public class ArticleService {
     }
 
 
+    public List<String> getAllType(){return articleRepository.getAllType();}
+
+    public List<Article> getTypeArticles(String type){return articleRepository.getTypeArticles(type);}
+
+
 //    public ArrayList timeLineArticle(){
 //        List<Article> articles=articleRepository.findAll();
 //        ArrayList all= new ArrayList();

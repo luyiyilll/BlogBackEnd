@@ -191,4 +191,13 @@ public class UserController {
     public ArrayList getRecentVisit(@RequestParam int id){
         return userService.getRecentVisit(id);
     }
+
+
+    @PostMapping("addvisituser")
+    public String addVisitedUser(@RequestParam int touserid,@RequestParam int userid){
+        if(userService.addVisitedUser(touserid,userid)>0)
+            return "添加最近访问用户成功";
+        else
+            return "添加最近访问用户失败";
+    }
 }

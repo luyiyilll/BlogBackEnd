@@ -2,6 +2,7 @@ package com.blog.reposity;
 
 import com.blog.domin.Like;
 import com.blog.domin.User;
+import com.blog.domin.Visited;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -51,8 +52,20 @@ public interface UserReposity extends JpaRepository<User,Integer> {
     @Query(value = "select * from tb_user where id=?1",nativeQuery = true)
     public User getUserInfoById(int uid);
 
-    @Query(value = "select visited_user_id from tb_recently_visited where user_id=?1",nativeQuery = true)
+    @Query(value = "select user_id from tb_recently_visited where visited_user_id=?1",nativeQuery = true)
     public List<Integer> getRecentVisitId(int id);
+
+
+    @Query(value = "select count(*) from tb_recently_visited where visited_user_id=?1 and user_id=?2",nativeQuery = true)
+    public int selectVisitedUser(int touserid, int userid);
+
+    @Transactional
+    @Modifying
+    @Query(value = "insert into tb_recently_visited(visited_user_id,user_id) values(?1,?2)",nativeQuery = true)
+    public int addVisitedUser(int touserid,int userid);
+
+
+
 
 
     /*管理系统*/

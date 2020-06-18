@@ -194,6 +194,73 @@ public class ArticleController {
     }
 
     /**
+     *获取分类文章信息
+     */
+    @GetMapping("alltypearticlesinfo")
+    public ArrayList<Article> allTypeArticle(String type) throws Exception{
+        List<Article> articles=null;
+        String typename="";
+        switch (type) {
+            case "all":
+                articles = articleRepository.findAll();
+                break;
+            case "life":
+                typename="程序人生";
+                articles= articleService.getTypeArticles(typename);
+                break;
+            case "server":
+                typename="服务器端";
+                articles= articleService.getTypeArticles(typename);
+                break;
+            case "front":
+                typename="HTML/CSS";
+                articles= articleService.getTypeArticles(typename);
+        }
+
+        ArrayList all= new ArrayList();
+        ListIterator listIterator=articles.listIterator();
+
+        while (listIterator.hasNext()){
+            Article a= (Article) listIterator.next();
+            ArrayList o=new ArrayList();
+            o.add(a);
+
+            Article article= articleRepository.findById(a.getId());
+            int user_id=article.getUser_id();
+            User user=userReposity.getUserInfoById(user_id);
+            ArrayList uList=new ArrayList();
+            uList.add(user.getId());
+            uList.add(user.getUsername());
+            uList.add(user.getAvatar());
+            o.add(uList);
+
+            Statistics statistics=statisticsService.getArticleInfo(a.getId());
+            ArrayList sList=new ArrayList();
+            sList.add(statistics.getClick_num());
+            sList.add(statistics.getComment_num());
+            sList.add(statistics.getLikes_num());
+            o.add(sList);
+            all.add(o);
+
+        }
+        if(all!=null){
+            return all;
+        }else{
+            throw new Exception("无文章");
+        }
+
+    }
+
+    /**
+     * 获取所有分类
+     */
+    @GetMapping("alltype")
+    public List<String> getAllType(){
+        return  articleService.getAllType();
+    }
+
+
+    /**
      * 根据时间分类返回文章
      */
 //    public ArrayList timeLineArticle(){
